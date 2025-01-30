@@ -158,7 +158,11 @@ do_build_all()
 		make ARCH=arm64 rubik_pi3_defconfig
 	fi
 
-	make ARCH=arm64 CROSS_COMPILE=aarch64-qcom-linux- LOCALVERSION="" -j`nproc`
+	if [ -z $(which ccache) ]; then
+		make ARCH=arm64 CROSS_COMPILE=aarch64-qcom-linux- LOCALVERSION="" -j$(nproc)
+	else
+		make ARCH=arm64 CROSS_COMPILE="ccache aarch64-qcom-linux-" LOCALVERSION="" -j$(nproc)
+	fi
 }
 
 # ========================== Start ========================================
