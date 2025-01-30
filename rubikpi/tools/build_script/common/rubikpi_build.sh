@@ -163,6 +163,7 @@ do_build_all()
 	else
 		make ARCH=arm64 CROSS_COMPILE="ccache aarch64-qcom-linux-" LOCALVERSION="" -j$(nproc)
 	fi
+	make INSTALL_MOD_PATH=$TOP_DIR/mod_install modules_install
 }
 
 # ========================== Start ========================================

@@ -68,6 +68,18 @@ do_fastboot_reboot() {
 }
 
 # ========================== Start ========================================
+set -x
+adb wait-for-device devices
+adb root
+adb shell uname -a
+if [ -f $TOP_DIR/include/config/kernel.release ]; then
+	kver=$(cat $TOP_DIR/include/config/kernel.release)
+	echo adb shell rm -rf /lib/modules/$kver
+	adb shell rm -rf /lib/modules/$kver
+fi
+time adb push mod_install/* /
+adb shell "depmod -a $kver; sync; reboot bootloader"
+set +x
 while true; do
 	case "$1" in
 		-h|--help)           usage; exit 0;;
@@ -83,3 +95,5 @@ while true; do
 		break
 	fi
 done
+set -x
+adb wait-for-device shell uname -a
