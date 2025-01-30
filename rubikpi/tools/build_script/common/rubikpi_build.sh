@@ -108,7 +108,7 @@ do_dtb_package()
 		mkdir -p $TOP_DIR/rubikpi/output/pack
 	fi
 
-	cp $TOP_DIR/arch/arm64/boot/dts/qcom/rubikpi3.dtb $TOP_DIR/rubikpi/tools/pack/dtb_temp/dtb/combined-dtb.dtb
+	cp $TOP_DIR/arch/arm64/boot/dts/qcom/rubikpi3-c6490.dtb $TOP_DIR/rubikpi/tools/pack/dtb_temp/dtb/combined-dtb.dtb
 
 	build_fat_img $TOP_DIR/rubikpi/tools/pack/dtb_temp/dtb $TOP_DIR/rubikpi/output/pack/dtb.bin
 
